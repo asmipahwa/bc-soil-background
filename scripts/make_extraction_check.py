@@ -26,8 +26,15 @@ def find_cell(page, sample_id: str, value_raw: str, analyte: str):
     """Locate the value's cell, its analyte label cell and its sample-ID header cell."""
     for table in page.find_tables():
         text = table.extract()
-        hdr = next(((r, c) for r, row in enumerate(text[:12]) for c, cell in enumerate(row)
-                    if cell and cell.strip().split("\n")[0].strip() == sample_id), None)
+        hdr = next(
+            (
+                (r, c)
+                for r, row in enumerate(text[:12])
+                for c, cell in enumerate(row)
+                if cell and cell.strip().split("\n")[0].strip() == sample_id
+            ),
+            None,
+        )
         if hdr is None:
             continue
         col = hdr[1]
@@ -60,6 +67,7 @@ def render_check_image(page, found: dict, path) -> None:
     def outside(box, pad=2.5):
         # Draw boxes just outside the cell so the outline never covers the printed value.
         return (box[0] - pad, box[1] - pad, box[2] + pad, box[3] + pad)
+
     cx0, ctop, cx1, cbot = found["cell"]
     tx0, ttop, tx1, tbot = found["table"]
     hx0, htop, hx1, hbot = found["header"]
@@ -94,10 +102,12 @@ def main(per_report: int) -> None:
         sub = df[df.report_id == cfg.report_id]
         focus = sub[sub.analyte_raw.str.contains(FOCUS, regex=True)]
         # Half the check goes to As/Cu/Zn (what the statistics use), half to other metals.
-        pick = pd.concat([
-            focus.sample(per_report // 2, random_state=42),
-            sub.drop(focus.index).sample(per_report - per_report // 2, random_state=42),
-        ])
+        pick = pd.concat(
+            [
+                focus.sample(per_report // 2, random_state=42),
+                sub.drop(focus.index).sample(per_report - per_report // 2, random_state=42),
+            ]
+        )
         with pdfplumber.open(RAW / "reports" / cfg.file) as pdf:
             for _, r in pick.iterrows():
                 page = pdf.pages[int(r.page) - 1]
@@ -107,12 +117,19 @@ def main(per_report: int) -> None:
                     img_name = f"{cfg.report_id}_p{int(r.page)}_{r.sample_id}_{r.analyte_raw}.png"
                     img_name = img_name.replace(" ", "_").replace("/", "-").replace("\n", "_")
                     render_check_image(page, found, out_dir / img_name)
-                rows.append({
-                    "report_id": cfg.report_id, "page": int(r.page), "sample_id": r.sample_id,
-                    "analyte": r.analyte_raw, "extracted_value": r.value_raw,
-                    "image": f"extraction_check/{img_name}" if img_name else "(cell not located)",
-                    "pdf_value": "", "match": "", "checked_by": "",
-                })
+                rows.append(
+                    {
+                        "report_id": cfg.report_id,
+                        "page": int(r.page),
+                        "sample_id": r.sample_id,
+                        "analyte": r.analyte_raw,
+                        "extracted_value": r.value_raw,
+                        "image": f"extraction_check/{img_name}" if img_name else "(cell not located)",
+                        "pdf_value": "",
+                        "match": "",
+                        "checked_by": "",
+                    }
+                )
     sheet = pd.DataFrame(rows)
     sheet.to_csv(RESULTS / "extraction_check_blank.csv", index=False)
     print(f"{len(sheet)} values to check; images in {out_dir}")

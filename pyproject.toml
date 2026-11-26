@@ -21,6 +21,7 @@ dependencies = [
     "scipy>=1.18.1",
     "shapely>=2.2.0",
     "sqlalchemy>=2",
+    "tabulate>=0.10.0",
 ]
 
 [build-system]
@@ -33,3 +34,16 @@ dev = [
     "reportlab>=5.1.2",
     "ruff>=0.17.6",
 ]
+
+[project.scripts]
+bcsb = "bc_soil_background.pipeline:main"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

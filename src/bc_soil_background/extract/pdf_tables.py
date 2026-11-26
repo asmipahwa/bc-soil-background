@@ -54,8 +54,10 @@ class ReportConfig:
     @classmethod
     def load_all(cls, path: Path = CONFIG / "reports.yaml") -> list[ReportConfig]:
         raw = yaml.safe_load(path.read_text())
-        return [cls(report_id=k, **{f: v for f, v in d.items() if f in cls.__dataclass_fields__})
-                for k, d in raw["reports"].items()]
+        return [
+            cls(report_id=k, **{f: v for f, v in d.items() if f in cls.__dataclass_fields__})
+            for k, d in raw["reports"].items()
+        ]
 
 
 def parse_value(cell: str | None) -> tuple[float | None, bool, float | None] | None:
@@ -121,7 +123,7 @@ def read_sample_columns(table: list[list], cfg: ReportConfig) -> tuple[dict[int,
         for c, cell in enumerate(row):
             parts = [p.strip() for p in _clean(cell).split("\n")]
             if parts and pat.fullmatch(parts[0]):
-                samples[c] = dict(zip(cfg.combined_header, parts))
+                samples[c] = dict(zip(cfg.combined_header, parts, strict=False))  # missing lines stay unset
         header_rows.append(cfg.combined_header_row)
     else:
         found = _find_label_row(table, cfg.header_labels["sample_id"])
@@ -162,13 +164,18 @@ def read_sample_columns(table: list[list], cfg: ReportConfig) -> tuple[dict[int,
     return samples, max(header_rows)
 
 
-def check_rpd_columns(table: list[list], samples: dict[int, dict], header_end: int,
-                      cfg: ReportConfig, page: int) -> None:
+def check_rpd_columns(
+    table: list[list], samples: dict[int, dict], header_end: int, cfg: ReportConfig, page: int
+) -> None:
     """Every QA/QC RPD column compares one duplicate pair, so the counts must agree."""
     if not cfg.rpd_label:
         return
-    rpd_cols = {c for row in table[: header_end + 1] for c, cell in enumerate(row)
-                if cfg.rpd_label.lower() in _clean(cell).lower()}
+    rpd_cols = {
+        c
+        for row in table[: header_end + 1]
+        for c, cell in enumerate(row)
+        if cfg.rpd_label.lower() in _clean(cell).lower()
+    }
     n_dups = sum(1 for m in samples.values() if m.get("duplicate_of"))
     if len(rpd_cols) != n_dups:
         raise ValueError(f"{cfg.report_id} p{page}: {len(rpd_cols)} RPD columns but {n_dups} duplicates found")
@@ -179,7 +186,7 @@ def _analyte_blocks(table: list[list], first_data_row: int):
     block = None
     for row in table[first_data_row:]:
         name = row[0]
-        if name is None:  # continuation row of the previous analyte (pH-dependent standards)
+        if not _clean(name):  # continuation row of the previous analyte (pH-dependent standards)
             if block:
                 block[2].append(row)
             continue
@@ -200,13 +207,14 @@ def extract_table(table: list[list], cfg: ReportConfig, page: int, section_unit:
         return []
     check_rpd_columns(table, samples, header_end, cfg, page)
     first_data_row = header_end + 1
-    out, unit_from_section = [], section_unit
+    out, unit_from_section, section = [], section_unit, ""
     for name, unit, rows in _analyte_blocks(table, first_data_row):
         # Section headers like "Total Metals (μg/g)" carry the unit for the rows below.
         m = re.search(r"\((?:μ|µ|u)g/g\)|\(mg/kg\)", name)
         if all(not _clean(r[c]) for r in rows for c in samples if c < len(r)):
             if m:
                 unit_from_section = m.group(0).strip("()")
+            section = name  # e.g. "Metals", "Salts (μg/g) via Sat. Paste."
             continue
         analyte_unit = unit if KNOWN_UNITS.fullmatch(unit) else (unit_from_section or cfg.default_unit)
         for c, meta in samples.items():
@@ -223,25 +231,28 @@ def extract_table(table: list[list], cfg: ReportConfig, page: int, section_unit:
                 continue
             value, non_detect, dl = parsed
             top, bottom = parse_depth(meta.get("depth"))
-            out.append({
-                "report_id": cfg.report_id,
-                "page": page,
-                "location_id": meta.get("location_id"),
-                "sample_id": meta["sample_id"],
-                "depth_top_m": top,
-                "depth_bottom_m": bottom,
-                "sample_date_raw": meta.get("date"),
-                "fill_or_native": meta.get("fill_native"),
-                "is_duplicate": bool(meta.get("duplicate_of")),
-                "duplicate_of": meta.get("duplicate_of"),
-                "sample_media": cfg.sample_media,
-                "analyte_raw": name,
-                "unit_raw": analyte_unit,
-                "value_raw": cells[0],
-                "value": value,
-                "non_detect": non_detect,
-                "detection_limit": dl,
-            })
+            out.append(
+                {
+                    "report_id": cfg.report_id,
+                    "page": page,
+                    "location_id": meta.get("location_id"),
+                    "sample_id": meta["sample_id"],
+                    "depth_top_m": top,
+                    "depth_bottom_m": bottom,
+                    "sample_date_raw": meta.get("date"),
+                    "fill_or_native": meta.get("fill_native"),
+                    "is_duplicate": bool(meta.get("duplicate_of")),
+                    "duplicate_of": meta.get("duplicate_of"),
+                    "sample_media": cfg.sample_media,
+                    "section": section,
+                    "analyte_raw": name,
+                    "unit_raw": analyte_unit,
+                    "value_raw": cells[0],
+                    "value": value,
+                    "non_detect": non_detect,
+                    "detection_limit": dl,
+                }
+            )
     return out
 
 
