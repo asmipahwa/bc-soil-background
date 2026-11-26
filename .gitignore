@@ -1,0 +1,6 @@
+sources/
+*.pdf
+!tests/fixtures/*.pdf
+.venv/
+__pycache__/
+.env
