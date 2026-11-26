@@ -32,7 +32,7 @@ We store **extracted numbers + citation**, not the PDFs.
 | Dataset | What it is | In-region rows | Licence | URL |
 |---|---|---|---|---|
 | RGS 2020 database (BCGS / GSC NGR) | Regional Geochemical Survey. **In this region every sample is moss-mat stream sediment (1989, RGS 24/25), not soil.** | 264 sites, As/Cu/Zn by AAS (264) and ICP (261) | Open Government Licence – BC | https://catalogue.data.gov.bc.ca/dataset/49a73c36-4a25-4be5-b6d1-abd020fb031a |
-| Assessment report-sourced surface sediment geochemistry (BCGS GeoFile 2026-02) | Exploration samples compiled from mineral assessment reports | **80 soil samples** (all from Assessment Report 29239, 2007), As/Cu/Zn in ppm | BCGS publication, licence still to confirm | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.zip |
+| Assessment report-sourced surface sediment geochemistry (BCGS GeoFile 2026-02) | Exploration samples compiled from mineral assessment reports | **80 soil samples** (all from Assessment Report 29239, 2007), As/Cu/Zn in ppm | BCGS GeoFile: "available, free of charge"; no explicit open licence found (checked 2026-11-26). Derived rows are **not committed** until confirmed | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.zip |
 | 1994 MoE Vancouver Island soil sampling (CDoGS survey 260008) | 9 sites; data only in a consultant report | not downloaded | n/a | https://geochem.nrcan.gc.ca/cdogs/content/svy/svy260008_e.htm |
 
 ## 3. Activities / land use (for PCOC screening)
@@ -66,3 +66,16 @@ Everything was downloaded on 2026-11-26. To rebuild `data/raw/` on a new machine
 | `activities/osm_overpass_test_2026-11-26.json` | Overpass API (https://overpass-api.de/api/interpreter), query for the §3 tags inside the bbox |
 
 Sprint 2 adds `scripts/download_raw.py`, which rebuilds this folder from the table above.
+
+## 5. How each source is used (Sprint 2)
+
+| Source | Rows in pipeline | Used for |
+|---|---|---|
+| R1–R3 site reports | 179 soil samples (17 duplicates), 3,592 results | soil background candidates (after screening) |
+| GeoFile 2026-02 soil (AR 29239) | 80 soil samples, 2,800 results | soil background candidates (after screening) |
+| RGS 2020 | 264 moss-mat sediment sites, 792 As/Cu/Zn results | **comparison only, labelled "sediment, not soil"** |
+
+Site locations: R1 geocoded from its civic address (Nominatim, ODbL); R2 placed at the
+Nanaimo Parkway / Nanaimo Lakes Road intersection named as its boundary in the report (Overpass, ODbL);
+R3 uses the centre coordinates printed in the report. See `config/sites.yaml`. OSM lookups are cached
+in `data/cache/` (© OpenStreetMap contributors, ODbL).

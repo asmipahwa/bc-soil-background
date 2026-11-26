@@ -1,0 +1,19 @@
+# Every raw file the pipeline needs, where it comes from, and what to do with it.
+# scripts/download_raw.py reads this to rebuild data/raw/ (git-ignored) from scratch.
+# All downloaded 2026-11-26. Licence/attribution notes: docs/DATA_SOURCES.md.
+files:
+  - path: reports/nanaimo_portdrive_dsi.pdf
+    url: https://www.nanaimo.ca/docs/your-government/projects/2012-1-port-drive/tetra-tech-detailed-site-investigation---1-port-drive.pdf
+  - path: reports/nanaimo_military_camp_annexes.pdf
+    url: https://canadabuys.canada.ca/documents/pub/att/2022/03/07/0fd1abd729889be915c968d017ddd696/ez897-220811_-_annexes.pdf
+  - path: reports/duncan_tch_pathway.pdf
+    url: https://duncan.ca/wp-content/uploads/dlm_uploads/2023/12/T-2023-02-TCH-Pathway-Final-Soil-Assessment-Results.pdf
+  - path: geochem/rgs2020_data.xlsx
+    url: https://catalogue.data.gov.bc.ca/dataset/49a73c36-4a25-4be5-b6d1-abd020fb031a/resource/d55bab93-e73e-497a-9cb3-08b579693f42/download/rgs2020_data.xlsx
+  - path: geochem/rgs2020_metadata.xlsx
+    url: https://catalogue.data.gov.bc.ca/dataset/49a73c36-4a25-4be5-b6d1-abd020fb031a/resource/cda9ab00-dc20-4b7d-95ea-5e4f54abf369/download/rgs2020_metadata.xlsx
+  - path: geochem/GF2026-02.zip
+    url: https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.zip
+    unzip_to: geochem/arssg
+  - path: geochem/aris/aris_29239.pdf
+    url: https://apps.nrs.gov.bc.ca/pub/aris/Report/29239.pdf/

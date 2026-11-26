@@ -5,3 +5,9 @@ sources/
 .venv/
 __pycache__/
 .env
+# Rebuilt by `uv run bcsb`. Not committed: they contain rows from BCGS GeoFile 2026-02,
+# whose licence is not yet confirmed (see docs/DATA_SOURCES.md).
+data/processed/
+data/staging/geochem_results.csv
+# Check-sheet template written by scripts/make_extraction_check.py
+docs/results/extraction_check_blank.csv
