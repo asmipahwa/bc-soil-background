@@ -1,0 +1,54 @@
+# Per-report extraction settings for src/bc_soil_background/extract/pdf_tables.py.
+# Page numbers are 1-based PDF page numbers (what a PDF viewer shows), not printed page labels.
+# `duplicates` maps a lab/field duplicate to its parent sample. The pairing comes from the
+# report itself (adjacent columns, same depth, or an RPD % column comparing them).
+reports:
+  R1_nanaimo_port_drive:
+    file: nanaimo_portdrive_dsi.pdf
+    pages: [84, 85, 86, 87, 88, 89, 90, 91, 92]   # Table 2: Soil Analytical Results - Metals
+    sample_id_pattern: '(?:\d\dBH\d+-\d+|BH\d\d-\d+-?\d*|DUP\s?[0-9A-Z]+)'
+    header_labels:
+      sample_id: Field ID
+      location_id: Borehole
+      depth: Depth
+      date: Date
+    # Every DUP column sits directly right of its parent, with blank depth/date. The SLRA
+    # tables (pp.780-784) print the same pairs side by side (e.g. "14BH01-1 DUP.2").
+    duplicates:
+      DUP2: 14BH01-1      # p.84
+      DUP1: 14BH19-3      # p.85
+      DUP 6: 14BH06-3     # p.86
+      DUP 3: 14BH08-4     # p.87
+      DUP5: 14BH09-5      # p.87
+      DUPA: 14BH27-4      # p.88
+      DUP 8: 14BH12-2     # p.88
+      DUP 10: 14BH16-1    # p.90
+      DUP 13: 14BH23-3    # p.90
+      DUP 11: 14BH25-2    # p.91
+      DUPD: 14BH33-2      # p.92
+      DUPC: 14BH31-1      # p.92
+  R2_nanaimo_military_camp:
+    file: nanaimo_military_camp_annexes.pdf
+    pages: [36, 37, 38]   # Table 3: Summary of Analytical Results for Soil - Total Metals
+    sample_id_pattern: 'BH\d\d-\w+-\d\d'
+    location_row: 0
+    combined_header_row: 1
+    combined_header: [sample_id, date, depth]
+    # Duplicates print "Duplicate" in the date line and sit right of their parent sample
+    # (e.g. BH15-06-04 duplicates BH15-06-03, both 1.2-1.4 m), followed by a "QA/QC RPD %" column.
+    duplicate_marker: Duplicate
+    rpd_label: RPD
+  R3_duncan_tch_pathway:
+    file: duncan_tch_pathway.pdf
+    pages: [15, 16]   # Table 2: Analytical Results for Metals and Salts in Soil
+    sample_id_pattern: 'AE23-BH\w+(?:-\d+)?'
+    default_unit: µg/g
+    header_labels:
+      sample_id: Sample ID
+      location_id: Sample Location
+      depth: Depth (m)
+      fill_native: Fill/Native
+      date: Date Sampled
+    rpd_label: RPD
+    duplicates:
+      AE23-BHX: AE23-BH6-1   # blind duplicate: on p.16 the "RPD %" column follows BH6-1, BHX
