@@ -1,0 +1,25 @@
+# Where each report's samples are placed on the map.
+# None of the three reports gives per-borehole coordinates in text form, so every sample is
+# placed at ONE point per site, with an uncertainty radius. Screening uses that radius.
+sites:
+  R1_nanaimo_port_drive:
+    name: 1 Port Drive, Nanaimo
+    method: nominatim
+    query: 1 Port Drive, Nanaimo, British Columbia, Canada
+    uncertainty_m: 300   # site is a ~10 ha waterfront parcel (PID 029-036-500); boreholes spread across it
+    note: Civic address geocoded with OpenStreetMap Nominatim. Borehole locations are only on figures.
+  R2_nanaimo_military_camp:
+    name: Nanaimo Military Camp bunker site, Nanaimo
+    method: road_intersection
+    roads: [Nanaimo Parkway, Nanaimo Lakes Road]
+    uncertainty_m: 400
+    note: >-
+      RAP annex p.6: "bounded by the Nanaimo Parkway to the west, Nanaimo Lakes Road to the south".
+      The point is the intersection of those two OSM roads, i.e. the site's south-west corner.
+  R3_duncan_tch_pathway:
+    name: TCH multi-use path frontage (540 Al Wilson Grove, 130/140 TCH), Duncan
+    method: report_coordinates
+    lat_dms: "48 46 24.5 N"
+    lon_dms: "123 41 55.0 W"
+    uncertainty_m: 150
+    note: Report p.2 Site Details gives this as the "approximate centre of investigation area".

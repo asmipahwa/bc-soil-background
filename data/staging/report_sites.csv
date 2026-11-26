@@ -1,0 +1,4 @@
+report_id,site_name,lat,lon,location_method,location_uncertainty_m,location_note
+R1_nanaimo_port_drive,"1 Port Drive, Nanaimo",49.16544,-123.93026,nominatim,300,Civic address geocoded with OpenStreetMap Nominatim. Borehole locations are only on figures.
+R2_nanaimo_military_camp,"Nanaimo Military Camp bunker site, Nanaimo",49.14674941425342,-123.97216399167944,road_intersection,400,"RAP annex p.6: ""bounded by the Nanaimo Parkway to the west, Nanaimo Lakes Road to the south"". The point is the intersection of those two OSM roads, i.e. the site's south-west corner."
+R3_duncan_tch_pathway,"TCH multi-use path frontage (540 Al Wilson Grove, 130/140 TCH), Duncan",48.773472222222225,-123.69861111111112,report_coordinates,150,"Report p.2 Site Details gives this as the ""approximate centre of investigation area""."
