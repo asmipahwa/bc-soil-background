@@ -41,3 +41,28 @@ We store **extracted numbers + citation**, not the PDFs.
 |---|---|---|---|
 | OpenStreetMap: `railway=rail`, `landuse=industrial/quarry/landfill/railway`, `amenity=fuel`, `man_made=works` | 342 (125 rail, 92 industrial, 73 fuel, 42 quarry, 6 works, 3 landfill, 1 railway landuse) | ODbL, © OpenStreetMap contributors | Overpass API, cached |
 | MINFILE mineral occurrences | 303 (101 Cu, 45 Au, 32 coal, 6 Zn; 57 past producers) | Catalogue says "Access Only": fetch at runtime, don't redistribute raw | openmaps.gov.bc.ca WFS `WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE` |
+
+## 4. Local copies (`data/raw/`, git-ignored)
+
+Everything was downloaded on 2026-11-26. To rebuild `data/raw/` on a new machine, download each URL below to the path shown.
+
+| Local path | Source URL |
+|---|---|
+| `reports/nanaimo_portdrive_dsi.pdf` (R1) | https://www.nanaimo.ca/docs/your-government/projects/2012-1-port-drive/tetra-tech-detailed-site-investigation---1-port-drive.pdf |
+| `reports/nanaimo_military_camp_annexes.pdf` (R2) | https://canadabuys.canada.ca/documents/pub/att/2022/03/07/0fd1abd729889be915c968d017ddd696/ez897-220811_-_annexes.pdf |
+| `reports/duncan_tch_pathway.pdf` (R3) | https://duncan.ca/wp-content/uploads/dlm_uploads/2023/12/T-2023-02-TCH-Pathway-Final-Soil-Assessment-Results.pdf |
+| `reports/nanaimo_portdrive_psi1.pdf` (not used) | https://www.nanaimo.ca/docs/your-government/projects/2012-1-port-drive/tetra-tech-stage-1-prelim-investigation---1-port-drive.pdf |
+| `reports/nanaimo_portdrive_dra.pdf` (not used) | https://www.nanaimo.ca/docs/your-government/projects/2012-1-port-drive/tetra-tech-detailed-risk-assessment---1-port-drive.pdf |
+| `reports/nanaimo_6commercial_review.pdf` (not used) | https://www.nanaimo.ca/docs/real-estate/review-of-historical-site-assessment-reports.pdf |
+| `reports/ladysmith_harbour_psi_dsi.pdf` (not used) | https://www.ladysmith.ca/docs/default-source/reports-2021/2011-12-21--ls-harbour-supplem-stage-1-psi-and-dsi-no-appendix-iii.pdf?sfvrsn=518f2abd_10 |
+| `reports/cvrd_fisherrd_env_review.pdf` (not used) | https://cvrd.ca/wp-content/uploads/2025/09/FisherRdEnvironmentalRpt-Nov-10.pdf |
+| `reports/portalberni_binder6.pdf` (not used) | https://portalberni.ca/sites/default/files/doc_library/Binder6.pdf |
+| `geochem/rgs2020_data.xlsx` | https://catalogue.data.gov.bc.ca/dataset/49a73c36-4a25-4be5-b6d1-abd020fb031a/resource/d55bab93-e73e-497a-9cb3-08b579693f42/download/rgs2020_data.xlsx |
+| `geochem/rgs2020_metadata.xlsx` | https://catalogue.data.gov.bc.ca/dataset/49a73c36-4a25-4be5-b6d1-abd020fb031a/resource/cda9ab00-dc20-4b7d-95ea-5e4f54abf369/download/rgs2020_metadata.xlsx |
+| `geochem/GF2026-02.zip` → `geochem/arssg/arssg_data_release.gpkg` | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.zip |
+| `geochem/GF2026-02.pdf` (report for the zip) | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.pdf |
+| `geochem/GF2019-04.pdf`, `geochem/GF2025-11.pdf`, `geochem/GF2026-11.pdf` (background reading) | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2019-04.pdf, …/BCGS_GF2025-11.pdf, …/BCGS_GF2026-11.pdf |
+| `activities/minfile_region_2026-11-26.json` | https://openmaps.gov.bc.ca/geo/pub/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE&outputFormat=application/json&srsName=EPSG:4326&bbox=48.6,-124.3,49.3,-123.6,urn:ogc:def:crs:EPSG::4326&count=2000 |
+| `activities/osm_overpass_test_2026-11-26.json` | Overpass API (https://overpass-api.de/api/interpreter), query for the §3 tags inside the bbox |
+
+Sprint 2 adds `scripts/download_raw.py`, which rebuilds this folder from the table above.
