@@ -1,0 +1,12 @@
+activity_type,matches,pcocs,As,Cu,Zn,buffer_m,source
+railway,"OSM railway=rail, landuse=railway","petroleum hydrocarbons, PAHs, BTEX, metals (engine wear, track ballast, cinders, herbicides), chlorinated solvents, glycols, herbicides, PCBs",Y,Y,Y,50,"CSAP PCOC Guidance v1.0 (2018) G6 Railyards, pp.16-17"
+sawmill,"OSM industrial=sawmill/lumber_yard/forestry","petroleum hydrocarbons, BTEX, PAHs, metals (machine shops, bone yards, burners), phenols, chlorophenols if wood treated",Y,Y,Y,100,"CSAP PCOC Guidance v1.0 (2018) I9 Sawmills, p.22"
+pulp_mill,"OSM industrial=pulp_mill/paper","petroleum hydrocarbons, ions, metals (boron, cadmium, chromium, lead, mercury, silver, zinc), PAHs",N,N,Y,1000,"CSAP PCOC Guidance v1.0 (2018) I2/I3 Pulp and paper, p.20"
+salvage,"OSM industrial=scrap_yard/auto_wrecker","metals, petroleum hydrocarbons, BTEX, PAHs, chlorinated solvents",Y,Y,Y,100,"CSAP PCOC Guidance v1.0 (2018) C4 Metal salvage p.7; G2 Vehicle salvage/wrecking p.15"
+fuel_station,"OSM amenity=fuel","petroleum hydrocarbons, BTEX, PAHs, fuel additives (tetraethyl lead, EDB, DCA, MTBE)",N,N,N,100,"CSAP PCOC Guidance v1.0 (2018) F5/F7/F8 Petroleum distribution, p.14"
+industrial_other,"OSM landuse=industrial, man_made=works, other industrial=*","unknown industrial use: treated as metals + hydrocarbons (example: R1 APEC 12 '1951 miscellaneous industrial activities' PCOCs = BTEX, VPH, LEPH, HEPH, PAHs, glycols and metals)",Y,Y,Y,100,"R1 Tetra Tech DSI 1 Port Drive (2014) p.15 APEC 12; precautionary"
+landfill,"OSM landuse=landfill","not covered by CSAP v1.0 (2018); treated as metals (precautionary project assumption)",Y,Y,Y,500,"project assumption (no cited PCOC list)"
+quarry,"OSM landuse=quarry","mined or disturbed ground: not usable as background",Y,Y,Y,100,"Protocol 4 v15 s.4.2.2 (site must not be previously mined or disturbed)"
+mine,"MINFILE status Past Producer / Producer / Developed Prospect","mined ground, mine waste: commodity and associated metals",Y,Y,Y,500,"Protocol 4 v15 s.4.2.2 (not previously mined or disturbed); MINFILE commodity fields"
+mineral_occurrence,"MINFILE status Showing / Prospect / Anomaly","natural mineralization, not a land use: recorded as a note, not excluded",N,N,N,500,"Protocol 4 v15 s.4.2.2 (known mineralized areas can be natural background)"
+report_site,"the investigated site of each site report (config/report_site_activities.csv)","the report's own PCOCs for the site, which include metals",Y,Y,Y,0,"see config/report_site_activities.csv"

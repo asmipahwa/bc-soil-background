@@ -17,3 +17,9 @@ files:
     unzip_to: geochem/arssg
   - path: geochem/aris/aris_29239.pdf
     url: https://apps.nrs.gov.bc.ca/pub/aris/Report/29239.pdf/
+  - path: protocols/protocol_4_v15.pdf
+    url: https://www2.gov.bc.ca/assets/gov/environment/air-land-water/site-remediation/docs/protocols/2026-06-10_final_protocol_4_v15_signed.pdf
+  - path: guidance/csap_pcoc_guidance_2018_v1.pdf
+    url: https://csapsociety.bc.ca/wp-content/uploads/r-PCOC-Guidance-June-2018-V1.0-002.pdf
+# Land-use layers (OSM, MINFILE) and regional districts are fetched by
+# src/bc_soil_background/extract/activities.py on first run and saved under data/raw/.
