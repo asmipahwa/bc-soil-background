@@ -50,6 +50,8 @@ def find_cell(page, sample_id: str, value_raw: str, analyte: str):
                     "label": table.rows[start].cells[0],
                     "header": table.rows[hdr[0]].cells[col],
                     "table": table.bbox,
+                    "row": i,
+                    "col": col,
                 }
     return None
 
@@ -135,7 +137,32 @@ def main(per_report: int) -> None:
     print(f"{len(sheet)} values to check; images in {out_dir}")
 
 
+def add_cell_refs() -> None:
+    """Record where each checked value sits in its PDF, so the check can be redone without the images.
+
+    The images are crops of consultants' reports, so they stay local (git-ignored); the CSV keeps
+    the page, the table row/column and the cell's bounding box in PDF points (x0, top, x1, bottom).
+    """
+    path = RESULTS / "extraction_check.csv"
+    sheet = pd.read_csv(path, dtype=str)
+    files = {c.report_id: c.file for c in ReportConfig.load_all()}
+    refs = []
+    for r in sheet.itertuples():
+        with pdfplumber.open(RAW / "reports" / files[r.report_id]) as pdf:
+            found = find_cell(pdf.pages[int(r.page) - 1], r.sample_id, r.extracted_value, r.analyte)
+        if found is None:
+            refs.append(("", "", ""))
+            continue
+        box = ", ".join(f"{v:.1f}" for v in found["cell"])
+        refs.append((found["row"], found["col"], box))
+    sheet["table_row"], sheet["table_col"], sheet["cell_bbox_pt"] = zip(*refs, strict=True)
+    sheet.to_csv(path, index=False)
+    print(f"added cell references to {path}")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-report", type=int, default=20)
-    main(ap.parse_args().per_report)
+    ap.add_argument("--refs", action="store_true", help="add page/cell references to extraction_check.csv")
+    a = ap.parse_args()
+    add_cell_refs() if a.refs else main(a.per_report)

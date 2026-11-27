@@ -11,3 +11,7 @@ data/processed/
 data/staging/geochem_results.csv
 # Check-sheet template written by scripts/make_extraction_check.py
 docs/results/extraction_check_blank.csv
+# Extraction-check images are crops of consultants' reports: kept local only.
+# extraction_check.csv records page + cell bounding box so they can be re-rendered
+# with: uv run python scripts/make_extraction_check.py
+docs/results/extraction_check/

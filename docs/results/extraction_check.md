@@ -9,8 +9,11 @@ sample is arsenic, copper or zinc, the analytes the background statistics use.
 | R2 Nanaimo Military Camp annexes | 20 | 20 | 10 |
 | R3 Duncan TCH Pathway | 20 | 20 | 10 |
 
-Per-value record: [`extraction_check.csv`](extraction_check.csv). Each row links to an image in
-[`extraction_check/`](extraction_check/).
+Per-value record: [`extraction_check.csv`](extraction_check.csv). Each row gives the PDF page, the
+table row/column and the cell's bounding box in PDF points (`cell_bbox_pt`: x0, top, x1, bottom), so
+anyone with the public PDF can find the cell. The check images are crops of consultants' reports, so
+they are **kept local only** (git-ignored); `uv run python scripts/make_extraction_check.py` re-renders
+them into `docs/results/extraction_check/`.
 
 ## How the check works
 
