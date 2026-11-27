@@ -5,6 +5,7 @@ Steps can be skipped with flags, e.g. `uv run bcsb --skip-load` to work without 
 
 import argparse
 
+from bc_soil_background.analysis import background, screening
 from bc_soil_background.extract import geochem, locations, pdf_tables
 from bc_soil_background.load import to_postgis
 from bc_soil_background.transform import standardize
@@ -22,6 +23,10 @@ def main() -> None:
     ]
     if not args.skip_load:
         steps.append(("load into PostGIS", to_postgis.main))
+    steps += [
+        ("screen soil samples with GeoPandas buffers", screening.main),
+        ("background statistics per region (SciPy)", background.main),
+    ]
     for i, (label, fn) in enumerate(steps, 1):
         print(f"\n== [{i}/{len(steps)}] {label}")
         fn()

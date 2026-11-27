@@ -1,0 +1,55 @@
+analyte,region,media,nd_method,n_samples_in,n_outliers,outlier_values,n,pct_non_detect,median,p95,p95_ci_low,p95_ci_high,shapiro_p_log
+As,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",DL/2,264,6,"0.5, 0.5, 0.6, 55.6, 112, 190",258,0.0,5.149999857,15.534999562999978,13.69999981,21.899999239999907,0.6218371782322685
+As,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=0,264,4,"0.6, 55.6, 112, 190",260,0.7692307692307693,5.099999905,15.444999600999985,13.709999800499997,21.5,0.6218371782322685
+As,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=DL,264,4,"0.6, 55.6, 112, 190",260,0.7692307692307693,5.099999905,15.444999600999985,13.709999800499997,21.5,0.5341303796276916
+As,Capital Regional District,"moss-mat sediment (sediment, not soil)",DL/2,20,0,,20,0.0,2.4499999285,6.744999981000003,5.5099997995500045,11.39999962,0.20730730596281843
+As,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=0,20,0,,20,0.0,2.4499999285,6.744999981000003,5.5099997995500045,11.39999962,0.20730730596281843
+As,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,20,0,,20,0.0,2.4499999285,6.744999981000003,5.5099997995500045,11.39999962,0.20730730596281843
+As,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",DL/2,179,4,"0.5, 40, 55.6, 190",175,0.0,5.900000095,16.359999467999994,13.690000151999996,21.5,0.617629593567632
+As,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=0,179,2,"55.6, 190",177,0.5649717514124294,5.900000095,17.079999923999967,13.959999657999996,25.29999924,0.5708685876875704
+As,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,179,3,"40, 55.6, 190",176,0.5681818181818182,5.799999952,16.349999429999997,13.67500019,21.5,0.5640497390865088
+As,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",DL/2,65,2,"0.5, 112",63,0.0,4.0,14.419999980999998,9.4800000191,28.79999924,0.23183022569640488
+As,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=0,65,1,112,64,1.5625,3.9500000475,14.379999971499995,9.470000028649999,28.79999924,0.23183022569640488
+As,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=DL,65,1,112,64,1.5625,3.9500000475,14.379999971499995,9.470000028649999,28.79999924,0.3622804980167935
+Cu,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",DL/2,264,2,"7.73, 9.62",262,0.0,49.75,133.34999999999997,113.82499999999996,150.27499999999995,0.37815688062011366
+Cu,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=0,264,2,"7.73, 9.62",262,0.0,49.75,133.34999999999997,113.82499999999996,150.27499999999995,0.37815688062011366
+Cu,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=DL,264,2,"7.73, 9.62",262,0.0,49.75,133.34999999999997,113.82499999999996,150.27499999999995,0.37815688062011366
+Cu,Capital Regional District,"moss-mat sediment (sediment, not soil)",DL/2,20,1,9.62,19,0.0,47.1,80.35999999999997,60.45999999999999,92.6,0.7396986696218391
+Cu,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=0,20,1,9.62,19,0.0,47.1,80.35999999999997,60.45999999999999,92.6,0.7396986696218391
+Cu,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,20,1,9.62,19,0.0,47.1,80.35999999999997,60.45999999999999,92.6,0.7396986696218391
+Cu,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",DL/2,179,2,"7.73, 11.5",177,0.0,51.5,131.09999999999997,114.1,150.5,0.15265444970061903
+Cu,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=0,179,2,"7.73, 11.5",177,0.0,51.5,131.09999999999997,114.1,150.5,0.15265444970061903
+Cu,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,179,2,"7.73, 11.5",177,0.0,51.5,131.09999999999997,114.1,150.5,0.15265444970061903
+Cu,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",DL/2,65,0,,65,0.0,44.4,139.9,81.9,163.5,0.20429995086778108
+Cu,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=0,65,0,,65,0.0,44.4,139.9,81.9,163.5,0.20429995086778108
+Cu,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=DL,65,0,,65,0.0,44.4,139.9,81.9,163.5,0.20429995086778108
+Zn,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",DL/2,264,3,"16, 19, 298",261,0.0,55.7,91.7,83.7,96.1,0.0025952846551066623
+Zn,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=0,264,3,"16, 19, 298",261,0.0,55.7,91.7,83.7,96.1,0.0025952846551066623
+Zn,P4 Region 1 Vancouver Island (study area),"moss-mat sediment (sediment, not soil)",ND=DL,264,3,"16, 19, 298",261,0.0,55.7,91.7,83.7,96.1,0.0025952846551066623
+Zn,Capital Regional District,"moss-mat sediment (sediment, not soil)",DL/2,20,0,,20,0.0,48.95,81.48,66.1,90.6,0.16692532709384572
+Zn,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=0,20,0,,20,0.0,48.95,81.48,66.1,90.6,0.16692532709384572
+Zn,Capital Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,20,0,,20,0.0,48.95,81.48,66.1,90.6,0.16692532709384572
+Zn,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",DL/2,179,5,"16, 21.2, 23.2, 23.4, 298",174,0.0,65.3,95.04499999999999,88.58,105.5,0.011624013358911856
+Zn,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=0,179,5,"16, 21.2, 23.2, 23.4, 298",174,0.0,65.3,95.04499999999999,88.58,105.5,0.011624013358911856
+Zn,Cowichan Valley Regional District,"moss-mat sediment (sediment, not soil)",ND=DL,179,5,"16, 21.2, 23.2, 23.4, 298",174,0.0,65.3,95.04499999999999,88.58,105.5,0.011624013358911856
+Zn,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",DL/2,65,0,,65,0.0,43.3,71.26,65.67999999999999,79.3,0.7069281161327183
+Zn,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=0,65,0,,65,0.0,43.3,71.26,65.67999999999999,79.3,0.7069281161327183
+Zn,Regional District of Nanaimo,"moss-mat sediment (sediment, not soil)",ND=DL,65,0,,65,0.0,43.3,71.26,65.67999999999999,79.3,0.7069281161327183
+As,P4 Region 1 Vancouver Island (study area),soil,DL/2,75,0,,75,26.666666666666668,3.0,7.0,5.299999999999997,8.0,3.257178057532223e-05
+As,P4 Region 1 Vancouver Island (study area),soil,ND=0,75,0,,75,26.666666666666668,3.0,7.0,5.299999999999997,8.0,0.0013324266965564085
+As,P4 Region 1 Vancouver Island (study area),soil,ND=DL,75,1,12,74,27.027027027027028,3.0,7.0,5.0,8.0,7.158906352704645e-08
+As,Cowichan Valley Regional District,soil,DL/2,75,0,,75,26.666666666666668,3.0,7.0,5.299999999999997,8.0,3.257178057532223e-05
+As,Cowichan Valley Regional District,soil,ND=0,75,0,,75,26.666666666666668,3.0,7.0,5.299999999999997,8.0,0.0013324266965564085
+As,Cowichan Valley Regional District,soil,ND=DL,75,1,12,74,27.027027027027028,3.0,7.0,5.0,8.0,7.158906352704645e-08
+Cu,P4 Region 1 Vancouver Island (study area),soil,DL/2,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Cu,P4 Region 1 Vancouver Island (study area),soil,ND=0,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Cu,P4 Region 1 Vancouver Island (study area),soil,ND=DL,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Cu,Cowichan Valley Regional District,soil,DL/2,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Cu,Cowichan Valley Regional District,soil,ND=0,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Cu,Cowichan Valley Regional District,soil,ND=DL,75,0,,75,0.0,29.0,74.69999999999997,55.0,99.0,0.0218815925570111
+Zn,P4 Region 1 Vancouver Island (study area),soil,DL/2,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
+Zn,P4 Region 1 Vancouver Island (study area),soil,ND=0,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
+Zn,P4 Region 1 Vancouver Island (study area),soil,ND=DL,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
+Zn,Cowichan Valley Regional District,soil,DL/2,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
+Zn,Cowichan Valley Regional District,soil,ND=0,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
+Zn,Cowichan Valley Regional District,soil,ND=DL,75,1,120,74,0.0,42.5,64.0,58.099999999999966,65.0,0.008059349824465038
