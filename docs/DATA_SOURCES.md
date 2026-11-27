@@ -35,12 +35,20 @@ We store **extracted numbers + citation**, not the PDFs.
 | Assessment report-sourced surface sediment geochemistry (BCGS GeoFile 2026-02) | Exploration samples compiled from mineral assessment reports | **80 soil samples** (all from Assessment Report 29239, 2007), As/Cu/Zn in ppm | BCGS GeoFile: "available, free of charge"; no explicit open licence found (checked 2026-11-26). Derived rows are **not committed** until confirmed | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.zip |
 | 1994 MoE Vancouver Island soil sampling (CDoGS survey 260008) | 9 sites; data only in a consultant report | not downloaded | n/a | https://geochem.nrcan.gc.ca/cdogs/content/svy/svy260008_e.htm |
 
-## 3. Activities / land use (for PCOC screening)
+## 3. Activities / land use (for PCOC screening) and regions
+
+Fetched by `src/bc_soil_background/extract/activities.py` on first run (2026-11-26), saved under `data/raw/`.
 
 | Layer | In-region features | Licence | Access |
 |---|---|---|---|
-| OpenStreetMap: `railway=rail`, `landuse=industrial/quarry/landfill/railway`, `amenity=fuel`, `man_made=works` | 342 (125 rail, 92 industrial, 73 fuel, 42 quarry, 6 works, 3 landfill, 1 railway landuse) | ODbL, © OpenStreetMap contributors | Overpass API, cached |
-| MINFILE mineral occurrences | 303 (101 Cu, 45 Au, 32 coal, 6 Zn; 57 past producers) | Catalogue says "Access Only": fetch at runtime, don't redistribute raw | openmaps.gov.bc.ca WFS `WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE` |
+| OpenStreetMap: `railway=rail`, `landuse=industrial/quarry/landfill/railway`, `amenity=fuel`, `man_made=works`, `industrial=*` | 350 (126 rail, 92 other industrial, 73 fuel, 42 quarry, 5 sawmill, 3 landfill, 2 pulp mill, 2 salvage) | ODbL, © OpenStreetMap contributors | Overpass API (`out geom`) |
+| MINFILE mineral occurrences | 303 (64 mines: past producer/producer/developed prospect; 239 showings/prospects/anomalies) | Catalogue says "Access Only": fetch at runtime, don't redistribute raw | openmaps.gov.bc.ca WFS `WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE` |
+| BC regional districts | 5 intersect the bbox | OGL-BC | openmaps.gov.bc.ca WFS `WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP` |
+
+PCOC references (local copies in `data/raw/protocols/` and `data/raw/guidance/`, listed in `config/raw_manifest.yaml`):
+
+- BC Protocol 4 v15 (2026): https://www2.gov.bc.ca/assets/gov/environment/air-land-water/site-remediation/docs/protocols/2026-06-10_final_protocol_4_v15_signed.pdf
+- CSAP Society, *PCOCs at Select Commercial and Industrial Land Uses*, v1.0 (June 2018): https://csapsociety.bc.ca/wp-content/uploads/r-PCOC-Guidance-June-2018-V1.0-002.pdf
 
 ## 4. Local copies (`data/raw/`, git-ignored)
 
@@ -63,7 +71,9 @@ Everything was downloaded on 2026-11-26. To rebuild `data/raw/` on a new machine
 | `geochem/GF2026-02.pdf` (report for the zip) | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2026-02.pdf |
 | `geochem/GF2019-04.pdf`, `geochem/GF2025-11.pdf`, `geochem/GF2026-11.pdf` (background reading) | https://cmscontent.nrs.gov.bc.ca/geoscience/PublicationCatalogue/GeoFile/BCGS_GF2019-04.pdf, …/BCGS_GF2025-11.pdf, …/BCGS_GF2026-11.pdf |
 | `activities/minfile_region_2026-11-26.json` | https://openmaps.gov.bc.ca/geo/pub/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE&outputFormat=application/json&srsName=EPSG:4326&bbox=48.6,-124.3,49.3,-123.6,urn:ogc:def:crs:EPSG::4326&count=2000 |
-| `activities/osm_overpass_test_2026-11-26.json` | Overpass API (https://overpass-api.de/api/interpreter), query for the §3 tags inside the bbox |
+| `activities/osm_activities.json` | Overpass API (https://overpass-api.de/api/interpreter), query `OSM_QUERY` in `extract/activities.py` |
+| `boundaries/regional_districts.json` | openmaps.gov.bc.ca WFS, see §3 |
+| `protocols/protocol_4_v15.pdf`, `guidance/csap_pcoc_guidance_2018_v1.pdf` | see §3 |
 
 Sprint 2 adds `scripts/download_raw.py`, which rebuilds this folder from the table above.
 
@@ -79,3 +89,12 @@ Site locations: R1 geocoded from its civic address (Nominatim, ODbL); R2 placed 
 Nanaimo Parkway / Nanaimo Lakes Road intersection named as its boundary in the report (Overpass, ODbL);
 R3 uses the centre coordinates printed in the report. See `config/sites.yaml`. OSM lookups are cached
 in `data/cache/` (© OpenStreetMap contributors, ODbL).
+
+## 6. How each source is used (Sprint 3)
+
+| Source | Used for |
+|---|---|
+| OSM + MINFILE land uses | GeoPandas buffer screening (`analysis/screening.py`) |
+| Report PCOC pages (R1 pp.3–4, 13–15, 20–21; R2 p.3; R3 p.4) | `config/report_site_activities.csv`: each report's own site has metal PCOCs |
+| Regional districts | grouping results per region (`analysis/background.py`) |
+| Protocol 4 v15 Table 1 (p.9) | comparison values for Region 1 (Cu 100, Zn 150; As printed "(4)") |

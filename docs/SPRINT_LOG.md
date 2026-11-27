@@ -14,3 +14,15 @@
 - Standardized schema (mg/kg, EPSG:3005, DQ flags), loaded into PostGIS 3.4 (523 samples, 7,184 results).
 - `uv run bcsb` reruns everything; a fresh clone reproduced all outputs byte-for-byte.
 - Open: GeoFile 2026-02 licence unconfirmed, so its derived rows are git-ignored for now.
+
+## Sprint 3 (2026-11-26), fast mode: only what the three resume bullets need
+
+- Read Protocol 4 v15 section 4 → `docs/PROTOCOL_NOTES.md`.
+- `config/activity_pcoc.csv` (cited PCOCs + buffer distances) and `config/report_site_activities.csv`.
+- `extract/activities.py`: OSM (Overpass, with geometry), MINFILE, regional districts.
+- `analysis/screening.py`: GeoPandas buffers (buffer + location uncertainty) for each sample and metal.
+  Result: 75 of 259 soil samples kept (all 179 report samples excluded; 5 GeoFile samples near a quarry).
+- `analysis/background.py`: duplicates averaged, ND = DL/2 (sensitivity: 0, DL), log10 + IQR outliers,
+  n / %ND / median / P95 / bootstrap CI / Shapiro in SciPy, per region → `docs/results/RESULTS.md` + 3 plots.
+- README, INTERVIEW_NOTES, MIT licence. Extraction-check images now git-ignored, with page/cell refs in the CSV.
+- Skipped on purpose: Streamlit app, long notebook, CI.
